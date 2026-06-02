@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "api/pedido.js": {
-      "maxDuration": 60
-    }
-  }
-}
