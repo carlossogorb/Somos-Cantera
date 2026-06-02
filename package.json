@@ -1,0 +1,19 @@
+{
+  "name": "somos-cantera-pedidos",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
+    "exceljs": "^4.4.0",
+    "formidable": "^3.5.2",
+    "resend": "^4.0.0",
+    "stripe": "^16.12.0"
+  },
+  "devDependencies": {
+    "vercel": "^39.0.0"
+  }
+}
