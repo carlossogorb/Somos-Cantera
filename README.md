@@ -1,0 +1,1 @@
+Web Somos Cantera estilo negro/amarillo. Cambia teléfono, email y precios antes de publicar. Incluye index.html, pedido.html, gracias.html, cancelado.html, css, js e imágenes.
