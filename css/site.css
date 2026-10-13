@@ -241,7 +241,8 @@ h3 { font-size: 1.6rem; text-transform: uppercase; }
 .estilo--ancho .estilo__texto { max-width: 640px; }
 .album-ej { display: grid; grid-template-columns: 349fr 804fr; gap: 14px; }
 .album-ej img { width: 100%; height: auto; border-radius: 4px; box-shadow: 0 22px 40px -20px rgba(0,0,0,.7); }
-.album-ej__equipos { grid-column: 1 / -1; }
+.album-ej__equipos, .album-ej__interior { grid-column: 1 / -1; }
+.album-ej img.album-ej__interior { box-shadow: none; filter: drop-shadow(0 22px 26px rgba(0,0,0,.45)); }
 .album-ej__equipos img { display: block; }
 .ejemplos__nota { margin-top: 40px; font-size: .85rem; color: rgba(255,255,255,.62); }
 
@@ -255,6 +256,8 @@ h3 { font-size: 1.6rem; text-transform: uppercase; }
 .opcion > p:not([class]) { margin-top: 12px; color: var(--tinta-suave); }
 .opcion h4 { margin: 26px 0 0; font-family: var(--display); font-weight: 800; font-size: 1.35rem; text-transform: uppercase; }
 
+.opcion__portada { display: block; width: 100%; max-width: 290px; height: auto; margin: 22px auto 0; filter: drop-shadow(0 16px 18px rgba(16,41,27,.28)); }
+.opcion__portada--doble { max-width: 100%; }
 .esquema { margin-top: 22px; display: grid; gap: 12px; }
 .esquema--doble { grid-template-columns: 1fr 1fr; }
 .esquema__album {
