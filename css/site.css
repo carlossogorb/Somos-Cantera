@@ -239,7 +239,7 @@ h3 { font-size: 1.6rem; text-transform: uppercase; }
 .galeria--clasico li:nth-child(1) { transform: rotate(-2deg); }
 .galeria--clasico li:nth-child(2) { transform: translateY(-14px); }
 .galeria--clasico li:nth-child(3) { transform: rotate(2deg); }
-.galeria--especial { grid-template-columns: repeat(6, 1fr); }
+.galeria--especial { grid-template-columns: repeat(5, 1fr); }
 .galeria--especial img { border-radius: 10px; }
 .estilo--ancho { grid-template-columns: 1fr; }
 .estilo--ancho .estilo__texto { max-width: 640px; }
