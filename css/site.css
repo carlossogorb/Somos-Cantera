@@ -75,9 +75,9 @@ h3 { font-size: 1.6rem; text-transform: uppercase; }
 
 /* ---------- Cabecera ---------- */
 .cabecera { position: sticky; top: 0; z-index: 20; background: var(--cesped); color: var(--blanco); }
-.cabecera__fila { display: flex; align-items: center; gap: 28px; min-height: 68px; }
-.marca { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--display); font-weight: 800; font-size: 1.5rem; text-transform: uppercase; letter-spacing: .02em; }
-.marca img { width: 36px; height: auto; }
+.cabecera__fila { display: flex; align-items: center; gap: 28px; min-height: 104px; padding-block: 10px; }
+.marca { display: flex; align-items: center; flex: none; }
+.marca img { height: 84px; width: auto; }
 .menu { display: flex; gap: 26px; margin-left: auto; }
 .menu a { text-decoration: none; font-weight: 600; font-size: .95rem; opacity: .85; }
 .menu a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 6px; }
@@ -219,7 +219,7 @@ h3 { font-size: 1.6rem; text-transform: uppercase; }
   color: var(--blanco);
   box-shadow: 0 24px 34px -16px rgba(0,0,0,.55);
 }
-.sobre img { width: 46%; height: auto; }
+.sobre img { width: 52%; height: auto; }
 .sobre p { font-family: var(--display); font-weight: 800; font-size: 1.3rem; text-transform: uppercase; }
 
 /* ---------- Proceso ---------- */
@@ -362,7 +362,8 @@ h3 { font-size: 1.6rem; text-transform: uppercase; }
 }
 @media (max-width: 600px) {
   body { font-size: 1rem; }
-  .marca span { display: none; }
+  .marca img { height: 64px; }
+  .cabecera__fila { min-height: 84px; }
   .album__huecos { gap: 6px; }
   .beneficios { grid-template-columns: 1fr; gap: 28px; }
   .pasos { grid-template-columns: 1fr; gap: 24px; }
