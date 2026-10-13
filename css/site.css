@@ -159,9 +159,9 @@ h3 { font-size: 1.6rem; text-transform: uppercase; }
     animation: pegar .55s cubic-bezier(.2,.9,.3,1.25) both;
     animation-delay: .45s;
   }
-  .hueco:nth-child(2) > .cromo { animation-delay: .61s; }
-  .hueco:nth-child(3) > .cromo { animation-delay: .77s; }
-  .hueco:nth-child(4) > .cromo { animation-delay: .93s; }
+  .hueco:nth-child(3) > .cromo { animation-delay: .61s; }
+  .hueco:nth-child(4) > .cromo { animation-delay: .77s; }
+  .hueco:nth-child(6) > .cromo { animation-delay: .93s; }
   .hueco:nth-child(8) > .cromo { animation-delay: 1.15s; }
   .hueco > .cromo--ultimo { animation-duration: .7s; }
 }
