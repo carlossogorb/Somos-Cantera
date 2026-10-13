@@ -239,14 +239,11 @@ h3 { font-size: 1.6rem; text-transform: uppercase; }
 .galeria--especial img { border-radius: 10px; }
 .estilo--ancho { grid-template-columns: 1fr; }
 .estilo--ancho .estilo__texto { max-width: 640px; }
-.album-ej { display: grid; grid-template-columns: 349fr 804fr; gap: 14px; }
-.album-ej img { width: 100%; height: auto; border-radius: 4px; box-shadow: 0 22px 40px -20px rgba(0,0,0,.7); }
-.album-ej__equipos, .album-ej__interior { grid-column: 1 / -1; }
-.album-ej img.album-ej__interior { box-shadow: none; filter: drop-shadow(0 22px 26px rgba(0,0,0,.45)); }
-.album-ej__equipos img { display: block; }
 .ejemplos__nota { margin-top: 40px; font-size: .85rem; color: rgba(255,255,255,.62); }
 
 /* ---------- Organización: un álbum o varios ---------- */
+.album-ej { display: block; width: 100%; height: auto; filter: drop-shadow(0 22px 26px rgba(0,0,0,.45)); }
+
 .organizacion { background: var(--papel-2); }
 .organizacion__rejilla { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 32px); align-items: stretch; }
 .opcion { display: flex; flex-direction: column; padding: clamp(24px, 3vw, 36px); background: var(--blanco); border-radius: 10px; border: 2px solid #D5DECF; }
@@ -424,10 +421,7 @@ h3 { font-size: 1.6rem; text-transform: uppercase; }
   .galeria--clasico li:nth-child(2) { transform: translateY(-8px); }
   .galeria--especial { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-inline: calc(var(--gutter) * -1); padding: 4px var(--gutter) 18px; }
   .galeria--especial li { flex: 0 0 62%; scroll-snap-align: center; }
-  .album-ej { grid-template-columns: 1fr; }
   .esquema--doble { grid-template-columns: 1fr; }
-  .album-ej__equipos { overflow-x: auto; margin-inline: calc(var(--gutter) * -1); padding: 0 var(--gutter) 16px; scroll-snap-type: x proximity; }
-  .album-ej__equipos img { width: 1100px; max-width: none; }
   body { font-size: 1rem; }
   .marca img { height: 64px; }
   .cabecera__fila { min-height: 84px; }
