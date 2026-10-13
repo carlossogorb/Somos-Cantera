@@ -126,7 +126,6 @@ h3 { font-size: 1.6rem; text-transform: uppercase; }
 
 /* Cromo con imagen real */
 .cromo.cromo--img { padding: 0; background: var(--blanco); }
-.cromo.cromo--img::before { display: none; }
 .cromo--img img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* Cromo de jugador */
@@ -141,18 +140,6 @@ h3 { font-size: 1.6rem; text-transform: uppercase; }
   overflow: hidden;
   container-type: inline-size;
 }
-.cromo::before { /* fondo de la foto: césped con franja diagonal */
-  content: ""; position: absolute; inset: 5% 5% 24% 5%;
-  border-radius: 3px;
-  background:
-    linear-gradient(115deg, transparent 0 58%, rgba(255,255,255,.14) 58% 70%, transparent 70%),
-    linear-gradient(var(--cesped-2), var(--cesped));
-}
-.cromo__foto { position: relative; width: 78%; margin: auto auto 0; fill: #2E6B47; z-index: 1; }
-.cromo__dorsal { position: absolute; top: 7%; left: 10%; z-index: 2; font-family: var(--display); font-weight: 900; font-size: 26cqi; line-height: 1; color: var(--blanco); }
-.cromo__nombre { position: relative; z-index: 2; margin-top: 6%; font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: 15cqi; line-height: 1; text-align: center; color: var(--tinta); }
-.cromo__pos { position: relative; z-index: 2; font-size: 9cqi; text-align: center; color: var(--tinta-suave); line-height: 1.3; }
-
 /* El momento: los cromos se pegan en sus huecos */
 @media (prefers-reduced-motion: no-preference) {
   .hueco > .cromo {
@@ -186,50 +173,11 @@ h3 { font-size: 1.6rem; text-transform: uppercase; }
 .objeto { margin: 0; }
 .objeto figcaption { margin-top: 22px; font-size: .97rem; color: var(--tinta-suave); }
 .objeto figcaption strong { display: block; color: var(--tinta); font-family: var(--display); font-size: 1.45rem; font-weight: 800; text-transform: uppercase; line-height: 1.1; margin-bottom: 4px; }
-.objeto--album .portada { transform: rotate(-2.5deg); }
-.objeto--jugador .cromo { transform: rotate(3deg); max-width: 210px; }
-.objeto--especial .cromo { transform: rotate(-4deg); max-width: 210px; }
-.objeto--sobre .sobre { transform: rotate(2.5deg); }
-
-.portada {
-  aspect-ratio: 3 / 4;
-  background:
-    radial-gradient(120% 70% at 50% 110%, var(--cesped-2), transparent 60%),
-    var(--cesped);
-  color: var(--blanco);
-  border-radius: 3px 8px 8px 3px;
-  padding: 10% 10% 9%;
-  display: flex; flex-direction: column; align-items: center; text-align: center;
-  box-shadow: inset 10px 0 0 rgba(0,0,0,.18), 0 24px 40px -18px rgba(0,0,0,.5);
-}
-.portada__escudo { width: 34%; aspect-ratio: 40 / 46; height: auto; color: var(--verde); }
-.portada__club { margin-top: 10%; font-family: var(--display); font-weight: 900; font-size: clamp(1.8rem, 3.2vw, 2.6rem); line-height: .9; text-transform: uppercase; }
-.portada__temp { margin-top: 6px; font-size: .8rem; letter-spacing: .04em; color: var(--verde-claro); }
-.portada__lema { margin-top: auto; font-family: var(--display); font-weight: 700; font-size: 1.15rem; transform: skewX(-8deg); color: rgba(255,255,255,.9); }
-
-.cromo--grande { width: 100%; }
-.cromo--especial {
-  background: linear-gradient(140deg, #E7CC6E, var(--oro) 45%, #9C7B16);
-  align-items: center; justify-content: center;
-}
-.cromo--especial::before { background: linear-gradient(var(--cesped-2), var(--cesped)); inset: 7% 7% 24% 7%; }
-.cromo__escudo { position: relative; z-index: 1; width: 52%; aspect-ratio: 40 / 46; height: auto; margin: 14% auto auto; color: var(--verde); }
-.cromo--especial .cromo__nombre { margin-top: auto; color: var(--cesped); }
-
-.sobre {
-  aspect-ratio: 3 / 4.2;
-  max-width: 190px;
-  background:
-    repeating-linear-gradient(90deg, rgba(255,255,255,.07) 0 2px, transparent 2px 9px) top / 100% 14px no-repeat,
-    repeating-linear-gradient(90deg, rgba(255,255,255,.07) 0 2px, transparent 2px 9px) bottom / 100% 14px no-repeat,
-    linear-gradient(160deg, #2B6E46 0%, var(--cesped) 55%, #0A2617 100%);
-  border-radius: 4px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
-  color: var(--blanco);
-  box-shadow: 0 24px 34px -16px rgba(0,0,0,.55);
-}
-.sobre img { width: 52%; height: auto; }
-.sobre p { font-family: var(--display); font-weight: 800; font-size: 1.3rem; text-transform: uppercase; }
+.objeto__img { display: block; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,.18), 0 22px 36px -18px rgba(0,0,0,.55); }
+.objeto--album .objeto__img { border-radius: 0; box-shadow: none; filter: drop-shadow(0 18px 22px rgba(16,41,27,.35)); transform: rotate(-2deg); }
+.objeto--jugador .objeto__img { transform: rotate(3deg); max-width: 220px; }
+.objeto--especial .objeto__img { transform: rotate(-4deg); max-width: 220px; border-radius: 10px; }
+.objeto--sobre .objeto__img { transform: rotate(2.5deg); max-width: 220px; }
 
 /* ---------- Ejemplos ---------- */
 .ejemplos { background: var(--cesped); color: var(--blanco); }

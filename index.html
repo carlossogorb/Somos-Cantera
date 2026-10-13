@@ -18,12 +18,8 @@
 <body>
   <a class="skip" href="#contenido">Saltar al contenido</a>
 
-  <!-- Símbolos reutilizables: silueta de jugador y escudo del club ficticio de ejemplo -->
+  <!-- Símbolo reutilizable: escudo del club ficticio de ejemplo -->
   <svg class="sprites" aria-hidden="true">
-    <symbol id="jugador" viewBox="0 0 100 120">
-      <circle cx="50" cy="38" r="21"/>
-      <path d="M8 120c2-30 18-48 42-48s40 18 42 48z"/>
-    </symbol>
     <symbol id="escudo" viewBox="0 0 40 46">
       <path d="M20 1 38 7v14c0 12-7.5 20-18 24C9.5 41 2 33 2 21V7z" fill="currentColor"/>
       <path d="M20 6 33 10.5V21c0 9-5.3 15-13 18.5C12.3 36 7 30 7 21V10.5z" fill="none" stroke="#fff" stroke-width="2"/>
@@ -115,30 +111,22 @@
 
         <div class="mesa">
           <figure class="objeto objeto--album">
-            <div class="portada" aria-hidden="true">
-              <svg class="portada__escudo"><use href="#escudo"/></svg>
-              <p class="portada__club">C.F. Somos Cantera</p>
-              <p class="portada__temp">Temporada 2026/27</p>
-              <p class="portada__lema">Hoy cantera. Mañana historia.</p>
-            </div>
+            <img class="objeto__img" src="/assets/ejemplos/album-club-entero.webp" alt="Álbum de cromos de Somos Cantera, temporada 2026/2027" width="640" height="864" loading="lazy" decoding="async">
             <figcaption><strong>Álbum del club</strong> Portada, historia, valores, instalaciones, una doble página por equipo y patrocinadores.</figcaption>
           </figure>
 
           <figure class="objeto objeto--jugador">
-            <div class="cromo cromo--grande" aria-hidden="true"><span class="cromo__dorsal">10</span><svg class="cromo__foto"><use href="#jugador"/></svg><span class="cromo__nombre">Marc G.</span><span class="cromo__pos">Infantil B</span></div>
+            <img class="objeto__img" src="/assets/ejemplos/coleccion-jugador.webp" alt="Cromo de jugador de Alevín A, dorsal 3, defensa" width="440" height="603" loading="lazy" decoding="async">
             <figcaption><strong>Cromos de jugadores</strong> Uno por jugador y entrenador, con foto, nombre, dorsal, posición y categoría.</figcaption>
           </figure>
 
           <figure class="objeto objeto--especial">
-            <div class="cromo cromo--especial" aria-hidden="true"><svg class="cromo__escudo"><use href="#escudo"/></svg><span class="cromo__nombre">Escudo</span></div>
+            <img class="objeto__img" src="/assets/ejemplos/especial-dinamita.webp" alt="Cromo especial holográfico con apodo Dinamita" width="520" height="736" loading="lazy" decoding="async">
             <figcaption><strong>Cromos especiales</strong> Escudo, plantilla por equipo, cuerpo técnico, instalaciones y lo que el club quiera destacar.</figcaption>
           </figure>
 
           <figure class="objeto objeto--sobre">
-            <div class="sobre" aria-hidden="true">
-              <img src="/assets/logo-somos-cantera-claro.png" alt="" width="80" height="96">
-              <p>5 cromos</p>
-            </div>
+            <img class="objeto__img" src="/assets/ejemplos/coleccion-sobre.webp" alt="Sobre de cinco cromos de Somos Cantera" width="480" height="657" loading="lazy" decoding="async">
             <figcaption><strong>Sobres</strong> Para vender en el club y en los comercios del pueblo. Repetidos incluidos, como debe ser.</figcaption>
           </figure>
         </div>
