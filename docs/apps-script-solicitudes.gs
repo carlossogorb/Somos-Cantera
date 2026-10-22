@@ -2,7 +2,8 @@
  * Somos Cantera — script de la hoja «Somos Cantera — Solicitudes web».
  *
  * Recibe cada solicitud desde la web (función /api/solicitud de Vercel),
- * la añade como fila nueva y envía un aviso por email.
+ * la añade como fila nueva y te envía un aviso a tu propio Gmail
+ * (la cuenta dueña de la hoja), etiquetado como «Somos Cantera».
  *
  * Instalación: Extensiones → Apps Script, pegar este código, cambiar CLAVE
  * por la clave secreta, y Implementar → Nueva implementación → Aplicación web
@@ -10,7 +11,7 @@
  */
 
 const CLAVE = 'PEGA_AQUI_LA_CLAVE';            // la misma que SC_SHEETS_SECRET en Vercel
-const AVISO_A = 'pedidos@somoscantera.es';      // a dónde llega el aviso
+const ETIQUETA = 'Somos Cantera';               // etiqueta de Gmail donde se guardan los avisos
 const HOJA = 'Solicitudes';
 
 function doPost(e) {
@@ -45,17 +46,24 @@ function doPost(e) {
     'Respondiendo a este correo contestas directamente al club.'
   ];
   try {
-    MailApp.sendEmail({
-      to: AVISO_A,
-      replyTo: d.email,
-      subject: 'Nueva solicitud: ' + String(d.club).slice(0, 80) + ' (' + String(d.localidad).slice(0, 40) + ')',
-      body: lineas.join('\n'),
-      name: 'Web Somos Cantera'
-    });
+    const yo = Session.getEffectiveUser().getEmail();
+    const asunto = 'Nueva solicitud: ' + String(d.club).slice(0, 80) + ' (' + String(d.localidad).slice(0, 40) + ')';
+    GmailApp.sendEmail(yo, asunto, lineas.join('\n'), { replyTo: d.email, name: 'Web Somos Cantera' });
+    etiquetar(asunto);
   } catch (err) {
     console.error('No se pudo enviar el aviso', err); // la fila ya está guardada
   }
   return respuesta(true);
+}
+
+// Pone la etiqueta «Somos Cantera» al aviso recién enviado (la crea si no existe).
+function etiquetar(asunto) {
+  const etiqueta = GmailApp.getUserLabelByName(ETIQUETA) || GmailApp.createLabel(ETIQUETA);
+  for (let i = 0; i < 5; i++) {
+    const hilos = GmailApp.search('subject:"' + asunto.replace(/"/g, '') + '" newer_than:1d', 0, 1);
+    if (hilos.length) { hilos[0].addLabel(etiqueta); return; }
+    Utilities.sleep(1500);
+  }
 }
 
 function respuesta(ok) {
