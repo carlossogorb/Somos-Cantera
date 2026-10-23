@@ -65,10 +65,14 @@ module.exports = async function handler(req, res) {
       redirect: "follow",
       signal: AbortSignal.timeout(15000),
     });
-    const respuesta = await r.json().catch(() => null);
+    const cuerpo = await r.text();
+    let respuesta = null;
+    try { respuesta = JSON.parse(cuerpo); } catch { /* no es JSON */ }
     if (!r.ok || !respuesta || !respuesta.ok) {
-      console.error("Apps Script", r.status, respuesta);
-      return res.status(502).json({ ok: false });
+      // Diagnóstico sin datos sensibles: estado, tipo de respuesta y si el script rechazó la clave.
+      const motivo = !respuesta ? "respuesta_no_json" : "script_rechaza";
+      console.error("Apps Script", r.status, motivo, cuerpo.slice(0, 300));
+      return res.status(502).json({ ok: false, motivo, estado: r.status, tipo: r.headers.get("content-type") || "" });
     }
     return res.status(200).json({ ok: true });
   } catch (e) {
