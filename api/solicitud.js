@@ -72,7 +72,11 @@ module.exports = async function handler(req, res) {
       // Diagnóstico sin datos sensibles: estado, tipo de respuesta y si el script rechazó la clave.
       const motivo = !respuesta ? "respuesta_no_json" : "script_rechaza";
       console.error("Apps Script", r.status, motivo, cuerpo.slice(0, 300));
-      return res.status(502).json({ ok: false, motivo, estado: r.status, tipo: r.headers.get("content-type") || "" });
+      const titulo = (cuerpo.match(/<title>([^<]*)<\/title>/i) || [])[1] || "";
+      const u = new URL(r.url);
+      const rutaUrl = new URL(url).pathname.replace(/\/s\/[^/]+/, "/s/…");
+      return res.status(502).json({ ok: false, motivo, estado: r.status, tipo: r.headers.get("content-type") || "",
+        host: u.host, redirigido: r.redirected, titulo: titulo.slice(0, 120), rutaConfigurada: rutaUrl });
     }
     return res.status(200).json({ ok: true });
   } catch (e) {
