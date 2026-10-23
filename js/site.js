@@ -1,11 +1,8 @@
 /* Somos Cantera — formulario de solicitud.
-   Envía a Supabase (tabla public.solicitudes). La clave publicable solo permite
-   INSERTAR: la tabla tiene RLS y la web no puede leer, modificar ni borrar nada. */
+   Envía a /api/solicitud (función de Vercel), que valida los datos y los guarda
+   en la hoja de Google de solicitudes. El navegador no tiene acceso a la hoja. */
 (function () {
   "use strict";
-
-  var SUPABASE_URL = "https://ntjauizavadfatsrgbcp.supabase.co";
-  var SUPABASE_KEY = "sb_publishable_s-NY2SlDmBp6BWVbnhHe0A_3l_Brpo5";
 
   var form = document.getElementById("formulario");
   if (!form) return;
@@ -28,7 +25,7 @@
     estado.className = "formulario__estado" + (tipo ? " " + tipo : "");
   }
 
-  // Misma regla que la restricción de la tabla en Supabase.
+  // Misma regla que la validación de /api/solicitud.
   var EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
   function limpio(valor) {
@@ -86,13 +83,9 @@
     boton.disabled = true;
     aviso("Enviando…");
 
-    fetch(SUPABASE_URL + "/rest/v1/solicitudes", {
+    fetch("/api/solicitud", {
       method: "POST",
-      headers: {
-        "apikey": SUPABASE_KEY,
-        "Content-Type": "application/json",
-        "Prefer": "return=minimal"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(datos)
     })
       .then(function (respuesta) {
