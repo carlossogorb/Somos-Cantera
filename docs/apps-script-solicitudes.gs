@@ -114,6 +114,7 @@ function guardarFicha(d) {
     d.modelo, d.puntos_venta, d.fecha_entrega, d.evento,
     d.observaciones, 'nueva', ''
   ].map(limpio);
+  fila[0] = new Date(); // la fecha como fecha, no como texto
 
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
@@ -154,6 +155,12 @@ function etiquetar(asunto) {
     if (hilos.length) { hilos[0].addLabel(etiqueta); return; }
     Utilities.sleep(1500);
   }
+}
+
+// Ejecútala una vez desde el editor (botón «Ejecutar») para dar permiso a Drive y Gmail.
+function autorizar() {
+  DriveApp.getRootFolder();
+  GmailApp.getUserLabelByName(ETIQUETA);
 }
 
 function respuesta(ok) {
