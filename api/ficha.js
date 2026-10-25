@@ -13,7 +13,7 @@ const UNO_DE = {
   cromo_entrenadores: ["Sí", "No"],
   fotos: ["Somos Cantera en nuestras instalaciones", "El club aporta las fotos", "Lo decidimos juntos"],
   listado: ["Lo tenemos en Excel", "Lo tenemos en otro formato", "Hay que prepararlo"],
-  modelo: ["Proyecto completo", "Sin inversión", "Colaboración flexible", "Lo decidimos juntos"],
+  modelo: ["Proyecto completo", "Sin inversión", "Lo decidimos juntos"],
 };
 const OPCIONALES_UNO_DE = { estilo: ["", "Clásico y limpio", "Moderno y dinámico", "Retro", "Lo decidimos juntos"] };
 const VARIOS = {

@@ -271,6 +271,7 @@ h3 { font-size: 1.6rem; text-transform: uppercase; }
 
 /* ---------- Modelos ---------- */
 .modelos__rejilla { display: grid; grid-template-columns: 1fr 1.08fr 1fr; gap: 22px; align-items: stretch; }
+.modelos__rejilla--dos { grid-template-columns: 1fr 1fr; max-width: 900px; margin-inline: auto; }
 .modelo {
   display: flex; flex-direction: column;
   padding: 30px 28px;
