@@ -459,3 +459,8 @@ h3 { font-size: 1.6rem; text-transform: uppercase; }
 .aviso-cookies a { color: var(--cesped); font-weight: 600; }
 .aviso-cookies__botones { display: flex; gap: 10px; }
 .aviso-cookies__botones .boton { flex: 1; justify-content: center; padding-block: 10px; }
+
+/* Patrocinadores (sección modelos) */
+.modelos__patro { max-width: 900px; margin: 28px auto 0; padding: 22px 26px; border-radius: 16px; background: var(--papel-2); border-left: 5px solid var(--verde-claro); }
+.modelos__patro h3 { margin: 0 0 6px; font-size: 1.5rem; color: var(--cesped); }
+.modelos__patro p { margin: 0; color: var(--tinta-suave); }
