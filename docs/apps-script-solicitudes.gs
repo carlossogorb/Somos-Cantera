@@ -32,11 +32,16 @@ function guardarSolicitud(d) {
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
-    SpreadsheetApp.getActiveSpreadsheet().getSheetByName(HOJA).appendRow([
+    // La solicitud nueva se inserta en la fila 2, justo debajo de los títulos:
+    // las más recientes quedan arriba y las antiguas abajo.
+    const hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(HOJA);
+    const fila = [
       new Date(), limpio(d.nombre), limpio(d.club), limpio(d.email), limpio(d.telefono),
       limpio(d.localidad), limpio(d.rol), limpio(d.jugadores), limpio(d.mensaje),
       'Sí', 'nueva', ''
-    ]);
+    ];
+    hoja.insertRowBefore(2);
+    hoja.getRange(2, 1, 1, fila.length).setValues([fila]).setFontWeight('normal');
   } finally {
     lock.releaseLock();
   }
