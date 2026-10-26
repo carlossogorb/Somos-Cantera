@@ -48,11 +48,5 @@
         }
       ]
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/club",
-      "destination": "/club.html"
-    }
   ]
 }
