@@ -179,7 +179,7 @@ function crearPresupuestoImprenta(libro, p) {
     ['Álbumes: % de jugadores + entrenadores', PCT_ALBUMES, ''],
     ['Copias de cada cromo: % de jugadores + entrenadores', PCT_COPIAS, ''],
     ['Entrenadores con cromo', p.cromoEntrenadores ? 'Sí' : 'No', ''],
-    ['Sobres para llenar el álbum (objetivo)', 50, 'Cromos por sobre = modelos ÷ este número (entre 3 y 8)']
+    ['Sobres para llenar el álbum (objetivo)', 50, 'Cromos por sobre = modelos ÷ este número (entre 5 y 8)']
   ]);
   h.getRange('A4').setFontWeight('bold').setFontColor('#1E3B71');
   h.getRange('B5:B8').setBackground('#FFF2B3').setFontColor('#0000FF').setFontWeight('bold');
@@ -209,7 +209,7 @@ function crearPresupuestoImprenta(libro, p) {
       ['Cromos a imprimir', '=B' + (fila + 4) + '*B' + (fila + 5), ''],
       ['Álbumes', '=ROUNDUP($B$5*' + personas + ',0)', ''],
       ['Páginas del álbum (múltiplo de 4)', '=CEILING(2*' + equipos(b) + '+8,4)', '2 por equipo + portada, historia, autógrafos, patrocinadores y contraportada'],
-      ['Cromos por sobre', '=MIN(8,MAX(3,ROUND(B' + (fila + 4) + '/$B$8,0)))', 'Según el tamaño de la colección'],
+      ['Cromos por sobre', '=MIN(8,MAX(5,ROUND(B' + (fila + 4) + '/$B$8,0)))', 'Según el tamaño de la colección'],
       ['Sobres', '=ROUNDUP(B' + (fila + 6) + '/B' + (fila + 9) + ',0)', ''],
       ['Texto para pedir presupuesto', '="CROMOS-PEGATINAS 5,5 x 7,5 cm, color una cara, cortados individualmente con precorte trasero: "&B' + (fila + 4) + '&" modelos x "&B' + (fila + 5) + '&" unid. = "&B' + (fila + 6) + '&" cromos.  ÁLBUM A4 grapado, "&B' + (fila + 8) + '&" páginas, portada couché mate 350 g plastificada, interior couché mate 150 g: "&B' + (fila + 7) + '&" ejemplares.  SOBRES C7 opacos y ensobrado aleatorio de "&B' + (fila + 9) + '&" cromos: "&B' + (fila + 10) + '&" sobres."', '']
     ];
