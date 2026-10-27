@@ -28,15 +28,12 @@ function doPost(e) {
 }
 
 // ---------- Solicitud de información ----------
-// Hoja de la calculadora (pestaña «Tarifas») para el precio orientativo.
-const CALCULADORA_ID = '1azRTmGCsnjPxch79OzEYD1_9YvkX3NvE1P22LlO7MBY';
 const PCT_ALBUMES = 0.6;    // álbumes = 60 % de jugadores + entrenadores con cromo
 const PCT_COPIAS = 0.35;    // copias de cada cromo = 35 % de jugadores + entrenadores con cromo
 const SOBRES_OBJETIVO = 50; // cromos por sobre = modelos ÷ 50 (mínimo 5, máximo 8)
 
 function guardarSolicitud(d) {
   const c = calculos(d);
-  const precio = precioOrientativo(Number(d.jugadores));
 
   // La solicitud nueva se inserta en la fila 2, justo debajo de los títulos:
   // las más recientes quedan arriba y las antiguas abajo.
@@ -48,7 +45,7 @@ function guardarSolicitud(d) {
       new Date(), limpio(d.nombre), limpio(d.club), limpio(d.email), limpio(d.telefono),
       limpio(d.localidad), limpio(d.rol), d.jugadores, limpio(d.entrenadores_cromo), d.entrenadores || 0,
       d.equipos, limpio(d.formato), limpio(d.mensaje),
-      'Sí', 'nueva', '', precio.texto, c ? c.texto : ''
+      'Sí', 'nueva', '', c ? c.texto : ''
     ];
     hoja.insertRowBefore(2);
     hoja.getRange(2, 1, 1, fila.length).setValues([fila]).setFontWeight('normal');
@@ -70,8 +67,7 @@ function guardarSolicitud(d) {
       'CÁLCULO (opción de un álbum para todo el club)',
       '· Modelos de cromo: ' + c.modelos + ' · Copias de cada uno: ' + c.copias + ' · Cromos a imprimir: ' + c.cromos,
       '· Álbumes: ' + c.albumes + ' de ' + c.paginas + ' páginas',
-      '· Sobres: ' + c.sobres + ' de ' + c.porSobre + ' cromos',
-      '· Precio orientativo (tarifa): ' + precio.texto, '',
+      '· Sobres: ' + c.sobres + ' de ' + c.porSobre + ' cromos', '',
       'Texto para pedir presupuesto a la imprenta:', c.texto, '');
   }
   lineas.push(
@@ -97,21 +93,6 @@ function calculos(d) {
     modelos + ' modelos x ' + copias + ' unid. = ' + cromos + ' cromos. ÁLBUM A4 grapado, ' + paginas +
     ' páginas, portada couché mate 350 g plastificada, interior couché mate 150 g: ' + albumes + ' ejemplares.';
   return { modelos, copias, cromos, albumes, paginas, porSobre, sobres, texto };
-}
-
-// Busca el tramo en la pestaña «Tarifas» de la calculadora (filas «Hasta…», «De … a …»).
-function precioOrientativo(jugadores) {
-  try {
-    const filas = SpreadsheetApp.openById(CALCULADORA_ID).getSheetByName('Tarifas')
-      .getRange('A41:D60').getValues().filter(f => typeof f[1] === 'number' && typeof f[2] === 'number');
-    const tramo = filas.find(f => jugadores <= f[1]);
-    if (!tramo) return { texto: 'Más de ' + filas[filas.length - 1][1] + ' jugadores: presupuesto a medida' };
-    const eur = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' €';
-    return { texto: tramo[0] + ': ' + eur(tramo[2]) + ' + IVA (' + eur(tramo[3]) + ')' };
-  } catch (err) {
-    console.error('No se pudo leer la tarifa', err);
-    return { texto: '(no se pudo leer la tarifa)' };
-  }
 }
 
 // ---------- Aviso por Gmail ----------
@@ -140,7 +121,3 @@ function respuesta(ok) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-// Ejecútala una vez desde el editor (botón «Ejecutar») para dar permiso a leer la calculadora.
-function autorizar() {
-  console.log(precioOrientativo(100).texto);
-}
