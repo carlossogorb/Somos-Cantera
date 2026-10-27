@@ -95,8 +95,7 @@ function calculos(d) {
   const sobres = Math.ceil(cromos / porSobre);
   const texto = 'CROMOS-PEGATINAS 5,5 x 7,5 cm, color una cara, cortados individualmente con precorte trasero: ' +
     modelos + ' modelos x ' + copias + ' unid. = ' + cromos + ' cromos. ÁLBUM A4 grapado, ' + paginas +
-    ' páginas, portada couché mate 350 g plastificada, interior couché mate 150 g: ' + albumes +
-    ' ejemplares. SOBRES C7 opacos y ensobrado aleatorio de ' + porSobre + ' cromos: ' + sobres + ' sobres.';
+    ' páginas, portada couché mate 350 g plastificada, interior couché mate 150 g: ' + albumes + ' ejemplares.';
   return { modelos, copias, cromos, albumes, paginas, porSobre, sobres, texto };
 }
 
@@ -107,7 +106,7 @@ function precioOrientativo(jugadores) {
       .getRange('A41:D60').getValues().filter(f => typeof f[1] === 'number' && typeof f[2] === 'number');
     const tramo = filas.find(f => jugadores <= f[1]);
     if (!tramo) return { texto: 'Más de ' + filas[filas.length - 1][1] + ' jugadores: presupuesto a medida' };
-    const eur = n => Math.round(n).toLocaleString('es-ES') + ' €';
+    const eur = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' €';
     return { texto: tramo[0] + ': ' + eur(tramo[2]) + ' + IVA (' + eur(tramo[3]) + ')' };
   } catch (err) {
     console.error('No se pudo leer la tarifa', err);
