@@ -5,7 +5,12 @@
 // de Vercel (SC_SHEETS_URL y SC_SHEETS_SECRET); nunca en este repositorio público.
 
 const ROLES = ["Presidencia", "Junta directiva", "Coordinación deportiva", "Entrenador o entrenadora", "Familia", "Otro"];
-const JUGADORES = ["menos de 100", "100 a 200", "200 a 300", "más de 300"];
+const FORMATOS = ["Un álbum para todo el club", "Álbumes por categorías (F8 y F11)", "Aconsejadnos"];
+
+function entero(v, min, max) {
+  const n = typeof v === "string" ? Number(v) : v;
+  return Number.isInteger(n) && n >= min && n <= max ? n : null;
+}
 const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 function texto(v, min, max) {
@@ -49,7 +54,11 @@ module.exports = async function handler(req, res) {
     telefono: opcional(b.telefono, 30),
     localidad: texto(b.localidad, 2, 120),
     rol: ROLES.includes(b.rol) ? b.rol : null,
-    jugadores: JUGADORES.includes(b.jugadores) ? b.jugadores : null,
+    jugadores: entero(b.jugadores, 1, 2000),
+    equipos: entero(b.equipos, 1, 100),
+    entrenadores_cromo: b.entrenadores_cromo === "Sí" || b.entrenadores_cromo === "No" ? b.entrenadores_cromo : null,
+    entrenadores: b.entrenadores_cromo === "Sí" ? entero(b.entrenadores, 1, 300) : 0,
+    formato: FORMATOS.includes(b.formato) ? b.formato : null,
     mensaje: opcional(b.mensaje, 2000),
   };
   const invalido = Object.entries(datos).find(([, v]) => v === null);

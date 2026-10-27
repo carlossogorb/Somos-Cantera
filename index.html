@@ -404,13 +404,31 @@
               <option>Otro</option>
             </select>
           </div>
+          <div class="campo">
+            <label for="f-jugadores">Número de jugadores <span class="opcional">(aproximado)</span></label>
+            <input id="f-jugadores" name="jugadores" type="number" inputmode="numeric" min="1" max="2000" step="1" required placeholder="Ej.: 150">
+          </div>
+          <div class="campo">
+            <label for="f-equipos">Número de equipos</label>
+            <input id="f-equipos" name="equipos" type="number" inputmode="numeric" min="1" max="100" step="1" required placeholder="Ej.: 10">
+          </div>
           <fieldset class="campo campo--ancho">
-            <legend>Jugadores en el club</legend>
+            <legend>¿Los entrenadores también tendrán cromo?</legend>
             <div class="opciones">
-              <label><input type="radio" name="jugadores" value="menos de 100" required> Menos de 100</label>
-              <label><input type="radio" name="jugadores" value="100 a 200"> De 100 a 200</label>
-              <label><input type="radio" name="jugadores" value="200 a 300"> De 200 a 300</label>
-              <label><input type="radio" name="jugadores" value="más de 300"> Más de 300</label>
+              <label><input type="radio" name="entrenadores_cromo" value="Sí" required> Sí</label>
+              <label><input type="radio" name="entrenadores_cromo" value="No"> No</label>
+            </div>
+          </fieldset>
+          <div class="campo" id="campo-entrenadores" hidden>
+            <label for="f-entrenadores">Número de entrenadores <span class="opcional">(y staff con cromo)</span></label>
+            <input id="f-entrenadores" name="entrenadores" type="number" inputmode="numeric" min="1" max="300" step="1" placeholder="Ej.: 20">
+          </div>
+          <fieldset class="campo campo--ancho">
+            <legend>Formato del álbum</legend>
+            <div class="opciones">
+              <label><input type="radio" name="formato" value="Un álbum para todo el club" required> Un álbum para todo el club</label>
+              <label><input type="radio" name="formato" value="Álbumes por categorías (F8 y F11)"> Álbumes por categorías (F8 y F11)</label>
+              <label><input type="radio" name="formato" value="Aconsejadnos"> Aconsejadnos</label>
             </div>
           </fieldset>
           <div class="campo campo--ancho">

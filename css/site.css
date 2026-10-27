@@ -409,3 +409,4 @@ h3 { font-size: 1.6rem; text-transform: uppercase; }
 .modelos__patro { max-width: 900px; margin: 28px auto 0; padding: 22px 26px; border-radius: 16px; background: var(--papel-2); border-left: 5px solid var(--verde-claro); }
 .modelos__patro h3 { margin: 0 0 6px; font-size: 1.5rem; color: var(--cesped); }
 .modelos__patro p { margin: 0; color: var(--tinta-suave); }
+.campo[hidden] { display: none; }

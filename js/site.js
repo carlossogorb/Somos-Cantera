@@ -10,13 +10,34 @@
   var boton = form.querySelector('button[type="submit"]');
   var inicio = Date.now();
 
+  // El número de entrenadores solo se pide si van a tener cromo.
+  var campoEnt = document.getElementById("campo-entrenadores");
+  var inputEnt = form.elements.entrenadores;
+  function conEntrenadores() {
+    var marcado = form.querySelector('input[name="entrenadores_cromo"]:checked');
+    return !!marcado && marcado.value === "Sí";
+  }
+  function actualizarEntrenadores() {
+    var si = conEntrenadores();
+    campoEnt.hidden = !si;
+    inputEnt.required = si;
+    if (!si) inputEnt.value = "";
+  }
+  Array.prototype.forEach.call(form.querySelectorAll('input[name="entrenadores_cromo"]'), function (r) {
+    r.addEventListener("change", actualizarEntrenadores);
+  });
+
   var MENSAJES = {
     nombre: "Escribe tu nombre.",
     club: "Escribe el nombre del club.",
     email: "Escribe un email válido, por ejemplo nombre@club.es.",
     localidad: "Escribe la localidad del club.",
     rol: "Elige tu papel en el club.",
-    jugadores: "Indica cuántos jugadores tiene el club.",
+    jugadores: "Indica cuántos jugadores tiene el club (un número aproximado vale).",
+    equipos: "Indica cuántos equipos tiene el club.",
+    entrenadores_cromo: "Dinos si los entrenadores también tendrán cromo.",
+    entrenadores: "Indica cuántos entrenadores tendrán cromo.",
+    formato: "Elige el formato del álbum (o «Aconsejadnos»).",
     privacidad: "Tienes que aceptar la política de privacidad para enviar la solicitud."
   };
 
@@ -36,12 +57,17 @@
   function validar() {
     var primero = null;
     form.querySelectorAll("[aria-invalid]").forEach(function (el) { el.removeAttribute("aria-invalid"); });
-    ["nombre", "club", "email", "localidad", "rol", "jugadores", "privacidad"].forEach(function (nombre) {
+    var campos = ["nombre", "club", "email", "localidad", "rol", "jugadores", "equipos", "entrenadores_cromo"];
+    if (conEntrenadores()) campos.push("entrenadores");
+    campos.push("formato", "privacidad");
+    campos.forEach(function (nombre) {
       var campo = form.elements[nombre];
       var nodo = campo.length && !campo.tagName ? campo[0] : campo;
       var valido = campo.length && !campo.tagName
         ? Array.prototype.some.call(campo, function (r) { return r.checked; })
-        : (nodo.type === "checkbox" ? nodo.checked : nodo.value.trim().length >= (nombre === "rol" ? 1 : 2) && nodo.checkValidity());
+        : (nodo.type === "checkbox" ? nodo.checked
+          : nodo.type === "number" ? nodo.value.trim() !== "" && nodo.checkValidity()
+          : nodo.value.trim().length >= (nombre === "rol" ? 1 : 2) && nodo.checkValidity());
       if (valido && nombre === "email") valido = EMAIL.test(nodo.value.trim());
       if (!valido) {
         nodo.setAttribute("aria-invalid", "true");
@@ -75,7 +101,11 @@
       telefono: limpio(form.elements.telefono.value),
       localidad: form.elements.localidad.value.trim(),
       rol: form.elements.rol.value,
-      jugadores: form.querySelector('input[name="jugadores"]:checked').value,
+      jugadores: parseInt(form.elements.jugadores.value, 10),
+      equipos: parseInt(form.elements.equipos.value, 10),
+      entrenadores_cromo: form.querySelector('input[name="entrenadores_cromo"]:checked').value,
+      entrenadores: conEntrenadores() ? parseInt(inputEnt.value, 10) : 0,
+      formato: form.querySelector('input[name="formato"]:checked').value,
       mensaje: limpio(form.elements.mensaje.value),
       acepta_privacidad: true
     };
@@ -91,6 +121,7 @@
       .then(function (respuesta) {
         if (!respuesta.ok) throw new Error("HTTP " + respuesta.status);
         form.reset();
+        actualizarEntrenadores();
         aviso("Solicitud enviada. Te escribiremos a " + datos.email + " lo antes posible.", "ok");
       })
       .catch(function () {
