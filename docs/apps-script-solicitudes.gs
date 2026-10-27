@@ -29,7 +29,7 @@ function doPost(e) {
 
 // ---------- Solicitud de información ----------
 const PCT_ALBUMES = 0.6;    // álbumes = 60 % de jugadores + entrenadores con cromo
-const PCT_COPIAS = 0.35;    // copias de cada cromo = 35 % de jugadores + entrenadores con cromo
+const PCT_COPIAS = 0.4;     // copias de cada cromo = 40 % de jugadores + entrenadores con cromo
 const SOBRES_OBJETIVO = 50; // cromos por sobre = modelos ÷ 50 (mínimo 5, máximo 8)
 
 function guardarSolicitud(d) {
